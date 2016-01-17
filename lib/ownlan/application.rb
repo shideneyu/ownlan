@@ -14,7 +14,6 @@ module Ownlan
     def call
       raise Trollop.educate if no_valid_argument?
 
-
       config.modes.each do |type, mode|
         process(type, mode)
       end

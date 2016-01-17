@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'ownlan'
+
+opts = Ownlan::Cli.options
+Ownlan.load(opts)
