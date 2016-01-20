@@ -1,4 +1,6 @@
-module Attack
-  class Broadcast
+module Ownlan
+  module Manual
+    class Broadcast
+    end
   end
 end

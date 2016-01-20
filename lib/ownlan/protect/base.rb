@@ -1,4 +1,6 @@
-module Protect
-  class Base
+module Ownlan
+  module Protect
+    class Base
+    end
   end
 end

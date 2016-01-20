@@ -12,22 +12,28 @@ module Ownlan
     end
 
     def call
-      raise Trollop.educate if no_valid_argument?
+      return invalid_arguments if no_valid_argument?
 
-      config.modes.each do |type, mode|
-        process(type, mode)
+      config.modes.each do |type, modes|
+        modes.each { |mode| process(type, mode) }
       end
 
     end
 
     private
 
+    def invalid_arguments
+      Trollop.educate
+    rescue ArgumentError
+      raise ::Ownlan::MissingArgumentError
+    end
+
     def set_options(config_options)
       config_options.each { |k, v| config.send("#{k}=", v) }
     end
 
     def process(type, mode)
-      "Ownlan::#{type.upcase}::#{mode.upcase}".constantize.new(config).call if raw_options[mode]
+      "Ownlan::#{type.capitalize}::#{mode.capitalize}".constantize.new(config).process if raw_options[mode]
     end
 
     def no_valid_argument?

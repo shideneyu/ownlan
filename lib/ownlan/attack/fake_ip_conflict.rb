@@ -1,4 +1,6 @@
-module Attack
-  class FakeIpConflict < Base
+module Ownlan
+  module Attack
+    class FakeIpConflict < Base
+    end
   end
 end

@@ -1,4 +1,6 @@
-module Attack
-  class Capture
+module Ownlan
+  module Manual
+    class Capture
+    end
   end
 end

@@ -1,9 +1,8 @@
 module ServiceObjects
   class CraftArpPacket
-    attr_reader :saddr, :daddr, :saddr_ip, :daddr_ip, :client_ip
+    attr_reader :saddr, :daddr, :saddr_ip, :daddr_ip
 
-    def initialize(config, saddr, daddr, saddr_ip, daddr_ip, client_ip)
-      @client_ip = config.client_ip
+    def initialize(config, saddr, daddr, saddr_ip, daddr_ip)
       @delay     = config.delay
       @interface = config.interface
 
@@ -15,7 +14,7 @@ module ServiceObjects
     end
 
     def call
-      arp_packet = PacketFu::ARPPacket.new()
+      arp_packet = ::PacketFu::ARPPacket.new
 
       arp_packet.eth_saddr     = saddr
       arp_packet.eth_daddr     = daddr
@@ -27,5 +26,6 @@ module ServiceObjects
 
       arp_packet
     end
+
   end
 end

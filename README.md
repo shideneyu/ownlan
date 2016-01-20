@@ -6,10 +6,10 @@
 
 **OwnLan** has four features:
 
-1. Disconnect one or several users off the wire [Not Implemented]
-2. Protecting users from these kind of attacks [Not Implemented]
-3. Sending ARP + DHCP packets easily (manual way)[Not implemented]
-4. Easy ARP packets capture [Not Implemented]
+1. Disconnect one or several users off the wire
+2. Protecting users from these kind of attacks
+3. Sending ARP + DHCP packets easily (manual way)
+4. Easy ARP packets capture
 
 ### Disconnecting users off the wire
 
@@ -56,4 +56,4 @@ OP is the opcode: 1 for ARP Request, 2 for ARP Reply
 [To do]
 
 
-Copyright (c) 2015 Sidney Sissaoui, released under the MIT license
+Copyright (c) 2016 Sidney Sissaoui, released under the MIT license

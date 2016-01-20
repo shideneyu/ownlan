@@ -66,6 +66,7 @@ Common Options:
 
   opt :delay,     "Set the time lapse delay between each packet", default: 0.5
   opt :interface, "Set the network interface which will be used", short: 'i', default: 'wlan0'
+  opt :random_mac, "If setted, the used origin addresses will be randomly generated. If not specified, the corresponding mac of your given interface will be used #{mac=ServiceObjects::NetworkInformation.self_mac('wlan0') ; ', in this case ' + mac + ' for wlan0' if !mac.empty?}"
 
       end
     end

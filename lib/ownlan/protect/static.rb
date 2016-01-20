@@ -1,4 +1,6 @@
-module Protect
-  class Static
+module Ownlan
+  module Protect
+    class Static
+    end
   end
 end
