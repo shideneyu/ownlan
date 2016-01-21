@@ -3,4 +3,4 @@
 require 'ownlan'
 
 opts = Ownlan::Cli.options
-Ownlan.launch(opts)
+Ownlan.new(opts).call

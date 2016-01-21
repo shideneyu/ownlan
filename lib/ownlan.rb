@@ -23,10 +23,19 @@ require 'pry'
 require 'packetfu'
 
 
+
 module Ownlan
 
-  def self.launch(opts)
-    Ownlan::Application.new(opts).call
-  end
+  class << self
 
+    attr_reader :application
+
+    def new(opts)
+      @application = Ownlan::Application.new(opts)
+    end
+
+    def call
+      application.call
+    end
+  end
 end

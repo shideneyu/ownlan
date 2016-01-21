@@ -10,40 +10,47 @@ module Ownlan
 -- Ownlan is a simple, useful yet awesome pentesting LAN poisoning suite. --
 
 Usage:
-      ownlan [options] [sub-options] -i [interface]
+      ownlan --[options] [sub-options] --[other-option]
+
+Example:
+      ownlan --attack client --target-ip 192.168.0.1 --interface eth0 --delay 0
 
 where [options] are either:
 EOS
 
-  opt :attack, "Set an attack on a device on the network",  short: 'a'
-  opt :protect, "Protect a device from lan attacks",        short: 'p'
-  opt :broadcast, "Inject ARP crafted packets in the wire", short: 's'
-  opt :capture, "Sniffing ARP packets on the network",      short: 'c'
+  opt :attack, "Set an attack on a device on the network",  short: 'a', type: :string
+  opt :protect, "Protect a device from lan attacks",        short: 'p', type: :string
+  opt :broadcast, "Inject ARP crafted packets in the wire", short: 'b', type: :string
+  opt :capture, "Sniffing ARP packets on the network",      short: 'c', type: :string
 
 # Attack part
 banner <<-EOS
 
-Attacks sub-options. --attack [suboption] [targetIP] [sourceIP]   :
+where [sub-options] are either:
 
+Attacks sub-options   :
+  client              Set a First-Duplex disconnection attack (the client is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
+                      * Require options: victim_ip
+  gateway             Set a Second-Duplex disconnection attack (the gateway is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
+                      * Require options: victim_ip
+  ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
+                      * Require options:      victim_ip
+                      * Falcultative options: random_source_mac
+  fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
+                      * Require options: victim_ip
   EOS
 
-  opt :client,  "Set a First-Duplex disconnection attack (the client is targeted). If no source IP argument, yours will be given (useful for MITM Attacks).",    type: :string
-  opt :gateway, "Set a Second-Duplex disconnection attack (the gateway is targeted). If no source IP argument, yours will be given (useful for MITM Attacks).", type: :string
- 
-  opt :ntoa,              "The client is targeted to get disconnected, using a neighbour table overflow attack.", type: :string
-  opt :fake_ip_conflict, "Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone."
 
 # Protect part
 banner <<-EOS
 
 Protect sub-options:
+  stealth          Becomes invisible from network scanners, preventing you from getting targeted.
+  static           Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning.
+  freeze           Reset and Freeze your ARP Cache. Good against NTOAs.
+  resynchronize    Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway attack. (reveive IP or MAC argument)
 
   EOS
-  
-  opt :stealth,       "Becomes invisible from network scanners, preventing you from getting targeted."
-  opt :static,        "Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning."
-  opt :freeze,        "Reset and Freeze your ARP Cache. Good against NTOAs."
-  opt :resynchronize, "Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway attack. (reveive IP or MAC argument)"
 
 # Broadcast part
 banner <<-EOS
@@ -58,15 +65,17 @@ Capture sub-options:
 
   EOS
 
-# Common part
+# Other options part
 banner <<-EOS
-Common Options:
+Other Options:
 
   EOS
 
-  opt :delay,     "Set the time lapse delay between each packet", default: 0.5
-  opt :interface, "Set the network interface which will be used", short: 'i', default: 'wlan0'
-  opt :random_mac, "If setted, the used origin addresses will be randomly generated. If not specified, the corresponding mac of your given interface will be used #{mac=ServiceObjects::NetworkInformation.self_mac('wlan0') ; ', in this case ' + mac + ' for wlan0' if !mac.empty?}"
+  opt :delay,              "Set the time lapse delay between each packet", default: 0.5
+  opt :interface,          "Set the network interface which will be used", short: 'i', default: 'wlan0'
+  opt :random_source_mac,  "If setted, the used origin addresses will be randomly generated. If not specified, the corresponding mac of your given interface will be used #{mac=ServiceObjects::NetworkInformation.self_mac('wlan0') ; ', in your case ' + mac + ' for wlan0' if !mac.empty?}"
+  opt :victim_ip,          "Set the ip of the target ip address.", short: 't', type: :string
+  opt :source_mac,         "Set the mac of the source mac address.", short: 's', type: :string
 
       end
     end

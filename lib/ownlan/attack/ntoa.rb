@@ -3,10 +3,6 @@ module Ownlan
     class Ntoa < Base
 
       def process
-        victim_mac = ::PacketFu::Utils::arp(config.ntoa.strip, iface: config.interface.strip)
-
-        victim_ip  = config.ntoa
-
         @a = 10
         @b = 10
         @c = 10
@@ -47,14 +43,14 @@ module Ownlan
       private
 
       def source_ip_base
-        ServiceObjects::NetworkInformation.self_ip.split('.')[0..1].join('.')
+        ServiceObjects::NetworkInformation.self_ip.to_s.split('.')[0..1].join('.')
       end
 
       def source_mac(a=nil, b=nil, c=nil)
         if config.random_mac
           "00:03:FF:#{@a}:#{@b}:#{@c}"
         else
-          ServiceObjects::NetworkInformation.self_mac(config.interface)
+          self_mac
         end
       end
     end

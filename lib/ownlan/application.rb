@@ -5,6 +5,7 @@ module Ownlan
 
     def initialize(options)
       @raw_options = options
+
       @config = ::Ownlan.config.dup
 
       config_options = raw_options.reject{ |k, v| k.to_s.match('_given') || !v }
@@ -12,20 +13,19 @@ module Ownlan
     end
 
     def call
-      return invalid_arguments if no_valid_argument?
-
-      config.modes.each do |type, modes|
-        modes.each { |mode| process(type, mode) }
+      action = config.modes.find do |type, modes|
+        modes.find { |mode| process(type, mode) }
       end
 
+      show_menu unless action
     end
 
     private
 
-    def invalid_arguments
+    def show_menu
       Trollop.educate
     rescue ArgumentError
-      raise ::Ownlan::MissingArgumentError
+      raise ::Ownlan::MissingArgumentError, 'Missing or Invalid parameter.'
     end
 
     def set_options(config_options)
@@ -33,11 +33,15 @@ module Ownlan
     end
 
     def process(type, mode)
-      "Ownlan::#{type.capitalize}::#{mode.capitalize}".constantize.new(config).process if raw_options[mode]
+      return unless good_args?(type, mode)
+      "Ownlan::#{type.capitalize}::#{mode.capitalize}".constantize.new(config).process
+    rescue ::NoMethodError
+      show_menu
     end
 
-    def no_valid_argument?
-      !config.instance_variables.find { |opt, _| config.modes.values.flatten.find{|mode| "@#{mode}" == opt.to_s }}
+    def good_args?(type, mode)
+      raw_options[type] == mode.to_s
     end
+
   end
 end

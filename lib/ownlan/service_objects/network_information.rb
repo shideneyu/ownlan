@@ -9,7 +9,7 @@ module ServiceObjects
     end
 
     def self.self_ip
-      @self_ip ||= Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+      @self_ip ||= Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
     end
   end
 end
