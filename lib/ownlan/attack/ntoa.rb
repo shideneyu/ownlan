@@ -25,8 +25,8 @@ module Ownlan
               while @c < 100 && @b < 100 do
                 @c += 1
 
-                crafted_packet.eth_saddr     = source_mac(@a, @b, @c)     # another mac address does not work on linux? or local network is dropped?
-                crafted_packet.arp_saddr_mac = source_mac(@a, @b, @c)  # another mac address does not work on linux? or local network is dropped?
+                crafted_packet.eth_saddr     = source_mac(@a, @b, @c)
+                crafted_packet.arp_saddr_mac = source_mac(@a, @b, @c)
 
                 crafted_packet.arp_saddr_ip = "#{source_ip_base}.#{(@b - 10) }.#{(@c - 10)}"
 

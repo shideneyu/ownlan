@@ -12,12 +12,12 @@ Gem::Specification.new do |spec|
   spec.description           = 'Ownlan is used to test a network against MITM attacks, and then to secure it.'
   spec.homepage              = 'https://github.com/shideneyu/ownlan'
   spec.license               = 'MIT'
-  spec.required_ruby_version = '~> 2.1.2'
+  spec.required_ruby_version = '>= 1.9.3'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata['allowed_push_host'] = 'https://rubygems.org'
   else
     raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.'
   end

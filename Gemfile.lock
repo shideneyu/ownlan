@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ownlan (0.3.0)
+    ownlan (0.3.1)
       activesupport
       packetfu
       trollop
@@ -9,7 +9,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.2.3)
+    activesupport (4.2.4)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
