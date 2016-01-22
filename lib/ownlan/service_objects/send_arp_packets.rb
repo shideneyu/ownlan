@@ -1,24 +1,21 @@
 module ServiceObjects
   class SendArpPackets
-    attr_reader :arp_packet, :config
+    attr_reader :config, :packet
 
-    def initialize(application, packet)
+    def initialize(config, packet)
+      @config = config
       @packet = packet
-      @config = application.config
     end
 
     def call
       @i = 0
 
-      Thread.new do
-        while true
-          print "\r The ARP packet has been sent successfully #{@i} times"
-        end
-      end
-
-      while true
+      loop do
         @i += 1
         packet.to_w(config.interface)
+
+        print "\r The ARP packet has been sent successfully #{@i} times"
+
         sleep config.delay
       end
     end

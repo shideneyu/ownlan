@@ -22,17 +22,21 @@ module Ownlan
 
   class Configuration
 
-    attr_accessor :attack, :protect, :broadcast, :capture, :client, :gateway, :ntoa, :fake_ip_conflict, :stealth,
-                  :static, :freeze, :resynchronize, :delay, :interface, :version, :help, :victim_ip, :random_mac, :modes
+    attr_accessor :attack, :protect, :broadcast, :capture, :client, :gateway, :ntoa, :fake_ip_conflict, :stealth, :static,
+                  :freeze, :resynchronize, :delay, :interface, :version, :help, :victim_ip, :random_mac, :source_mac, :modes
 
     # Create a new instance.
     #
     # @return [Ownlan::Configuration]
     def initialize
-      @modes     = { attack: attack_sub_modes, protect: protect_sub_modes, manual: manual_sub_modes }
-      @interface = 'wlan0'
-      @delay     = 0.5
-      @victim_ip = '192.168.0.1'
+      @modes      = { attack: attack_sub_modes, protect: protect_sub_modes, manual: manual_sub_modes }
+      @interface  = 'wlan0'
+      @delay      = 0.5
+      @victim_ip  = '192.168.0.1'
+    end
+
+    def source_mac
+      @source_mac ||= ::ServiceObjects::NetworkInformation.self_mac(interface)
     end
 
     private

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ownlan (0.3.1)
+    ownlan (0.3.2)
       activesupport
       packetfu
       trollop

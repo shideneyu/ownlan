@@ -76,7 +76,6 @@ You can also use the provided executable. Simple launch it in accordance to the 
 
     ownlan --[options] [sub-options] --[other-option]
 
- 
 - Where [options] are either:
  
 
@@ -88,10 +87,13 @@ You can also use the provided executable. Simple launch it in accordance to the 
 
 -  where [sub-options] are either:
 
+
         client              Set a First-Duplex disconnection attack (the client is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                           * Required options: victim_ip
+                          * Falcultative options: random_source_mac , source_mac
         gateway             Set a Second-Duplex disconnection attack (the gateway is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                           * Required options: victim_ip
+                          * Falcultative options: random_source_mac , source_mac
         ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
                           * Required options: victim_ip
                           * Falcultative options: random_source_mac
@@ -107,9 +109,12 @@ You can also use the provided executable. Simple launch it in accordance to the 
 
 - Where  [Other Options] can be:
 
+
         -d, --delay=<f>            Set the time lapse delay between each packet (default: 0.5)
         -i, --interface=<s>        Set the network interface which will be used (default: wlan0)
-        -r, --random-source-mac    If setted, the used origin addresses will be randomly generated. If not specified, the mac of your given interface will be used.
+        -r, --random-source-mac    If setted, the used origin addresses will be randomly generated.
+        -t, --victim-ip=<s>        Set the ip of the victim ip address.
+        -s, --source-mac=<s>       Set the mac of the source mac address.
         -v, --version              Print version and exit
         -h, --help                 Show this message
 

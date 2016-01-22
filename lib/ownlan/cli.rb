@@ -28,11 +28,13 @@ banner <<-EOS
 
 where [sub-options] are either:
 
-Attacks sub-options   :
+Attacks sub-options:
   client              Set a First-Duplex disconnection attack (the client is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                       * Required options: victim_ip
+                      * Falcultative options: random_source_mac , source_mac
   gateway             Set a Second-Duplex disconnection attack (the gateway is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                       * Required options: victim_ip
+                      * Falcultative options: random_source_mac , source_mac
   ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
                       * Required options: victim_ip
                       * Falcultative options: random_source_mac
@@ -73,9 +75,9 @@ Other Options:
 
   opt :delay,              "Set the time lapse delay between each packet", default: 0.5
   opt :interface,          "Set the network interface which will be used", short: 'i', default: 'wlan0'
-  opt :random_source_mac,  "If setted, the used origin addresses will be randomly generated. If not specified, the mac of your given interface will be used #{mac=ServiceObjects::NetworkInformation.self_mac('wlan0') ; ', in your case ' + mac + ' for wlan0' if !mac.empty?}"
+  opt :random_source_mac,  "If setted, the used origin addresses will be randomly generated."
   opt :victim_ip,          "Set the ip of the target ip address.", short: 't', type: :string
-  opt :source_mac,         "Set the mac of the source mac address.", short: 's', type: :string
+  opt :source_mac,         "Set the mac of the source mac address. #{mac=ServiceObjects::NetworkInformation.self_mac('wlan1') ; 'Default: Your mac address for wlan0 (' + mac + ')' if !mac.empty?}", short: 's', type: :string
 
       end
     end

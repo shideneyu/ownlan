@@ -13,7 +13,7 @@ module Ownlan
         saddr_ip = "#{source_ip_base}.#{@b}.#{@c}"
         daddr_ip = victim_ip
 
-        crafted_packet = ServiceObjects::CraftArpPacket.new(config, saddr, daddr, saddr_ip, daddr_ip).call
+        crafted_packet = packet_craft(config, saddr, daddr, saddr_ip, daddr_ip).call
 
         loop do
           while @a < 100 do
