@@ -26,8 +26,6 @@ And require it in your application:
 
 ## Usage
 
-Please look at the [cli section](#command-line-interface) for advanced option.
-
 ### Configuration ###
 You can pass multiple variables that will be used in the gem.
 
@@ -43,15 +41,36 @@ end
 
 You can also pass any of those options inline when loading an instance of Ownlan.
 
-```rubypro
-Ownlan.new(attack: 'ntoa', victim_ip: '192.168.0.1', delay: 1.5, random_mac: true).call
+```ruby
+ownlan = Ownlan.new(attack: 'ntoa', victim_ip: '192.168.0.1', delay: 1.5, random_mac: true)
 ```
+
+## Launch Ownlan ##
+
+### In your Ruby code ###
+
+Once configured, you can run your instance of Ownlan with:
+
+```ruby
+ownlan.call
+```
+
+You are free to implement whatever way of your choice to handle concurrency: you can put this previous line in a `thread` for instance.
+
+### Using the Command Line Interface  ###
+
+```sh
+  ownlan --attack client --target-ip 192.168.0.1 --interface eth0 --delay 0
+```
+
+Please look at the [cli section](#command-line-interface) for more advanced options.
+
 ## Features
 
 **OwnLan** has four features:
 
 1. Disconnect one or several users off the wire
-2. Protecting users from these kind of attacks *[Not Implemented]*
+2. Protecting users from those kind of attacks *[Not Implemented]*
 3. Sending custom ARP + DHCP packets easily *[Not Implemented]*
 4. Easy ARP packets capture *[Not Implemented]*
 
@@ -132,10 +151,10 @@ __Ownlan__ follows [Semantic Versioning 2.0](http://semver.org/).
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
-# Contact
+## Contact
 
 Any question ? Feel free to contact me at `contact(at)sidney.email` .
-Any Issue ? Open a [ticket](https://github.com/shideneyu/ownlan/issues) !
+Any issue ? Open a [ticket](https://github.com/shideneyu/ownlan/issues) !
 
 ## License
 
