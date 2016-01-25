@@ -20,7 +20,7 @@ EOS
 
   opt :attack, "Set an attack on a device on the network",  short: 'a', type: :string
   opt :protect, "Protect a device from lan attacks",        short: 'p', type: :string
-  opt :broadcast, "Inject ARP crafted packets in the wire", short: 'b', type: :string
+  opt :broadcast, "Inject ARP crafted packets in the wire", short: 'b'
   opt :capture, "Sniffing ARP packets on the network",      short: 'c', type: :string
 
 # Attack part
@@ -50,14 +50,17 @@ Protect sub-options:
   stealth          Becomes invisible from network scanners, preventing you from getting targeted.
   static           Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning.
   freeze           Reset and Freeze your ARP Cache. Good against NTOAs.
-  resynchronize    Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway attack. (reveive IP or MAC argument)
+  resynchronize    Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway attack. Default params are your mac and the gateway's mac. WARNING: If your gateway_mac is the attacker's, this protection won't work. In this case, input the gateway's mac manually.
+                   * Required options: target_ip
+                   * Optional options: target_mac , gateway_mac
 
   EOS
 
 # Broadcast part
 banner <<-EOS
 
-Send sub-options:
+Broadcast:        Send raw ARP packets to the wire.
+                  * Required Options : victim_ip, victim_mac, source_ip, source_mac
 
   EOS
 
@@ -76,8 +79,12 @@ Other Options:
   opt :delay,              "Set the time lapse delay between each packet", default: 0.5
   opt :interface,          "Set the network interface which will be used", short: 'i', default: 'wlan0'
   opt :random_source_mac,  "If setted, the used origin addresses will be randomly generated."
-  opt :victim_ip,          "Set the ip of the target ip address.", short: 't', type: :string
+  opt :victim_ip,          "Set the ip address of the target.", short: 't', type: :string
+  opt :victim_mac,         "Set the mac address of the target", type: :string
+  opt :gateway_ip,         "Set the ip adress of the gateway", type: :string
+  opt :gateway_mac,        "Set the mac adress of the gateway. (for Protect only)", type: :string
   opt :source_mac,         "Set the mac of the source mac address. #{mac=ServiceObjects::NetworkInformation.self_mac('wlan1') ; 'Default: Your mac address for wlan0 (' + mac + ')' if !mac.empty?}", short: 's', type: :string
+  opt :source_ip,          "Set the ip address of the originating packet.", type: :string
 
       end
     end

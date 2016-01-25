@@ -9,6 +9,7 @@ require 'ownlan/attack/gateway.rb'
 require 'ownlan/attack/ntoa.rb'
 require 'ownlan/manual/capture.rb'
 require 'ownlan/manual/broadcast.rb'
+require 'ownlan/protect/base.rb'
 require 'ownlan/protect/freeze.rb'
 require 'ownlan/protect/resynchronize.rb'
 require 'ownlan/protect/static.rb'
@@ -21,7 +22,6 @@ require 'thread'
 require 'trollop'
 require 'pry'
 require 'packetfu'
-
 
 
 module Ownlan

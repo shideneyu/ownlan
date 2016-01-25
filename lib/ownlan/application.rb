@@ -1,15 +1,16 @@
 module Ownlan
   class Application
 
-    attr_reader :raw_options, :config
+    attr_reader :raw_options, :config_options, :config
 
     def initialize(options)
       @raw_options = options
 
       @config = ::Ownlan.config.dup
 
-      config_options = raw_options.reject{ |k, v| k.to_s.match('_given') || !v }
-      set_options(config_options)
+      @config_options = raw_options.reject{ |k, v| k.to_s.match('_given') || !v }
+
+      set_options
     end
 
     def call
@@ -28,7 +29,7 @@ module Ownlan
       raise ::Ownlan::MissingArgumentError, 'Missing or Invalid parameter.'
     end
 
-    def set_options(config_options)
+    def set_options
       config_options.each { |k, v| config.send("#{k}=", v) }
     end
 
@@ -40,7 +41,7 @@ module Ownlan
     end
 
     def good_args?(type, mode)
-      raw_options[type] == mode.to_s
+      raw_options[type] == mode.to_s || config_options.keys.to_set.intersect?(config.manual_sub_modes.to_set)
     end
 
   end

@@ -13,7 +13,7 @@ module Ownlan
         saddr_ip = "#{source_ip_base}.#{@b}.#{@c}"
         daddr_ip = victim_ip
 
-        crafted_packet = packet_craft(config, saddr, daddr, saddr_ip, daddr_ip).call
+        crafted_packet = packet_craft(saddr, daddr, saddr_ip, daddr_ip).call
 
         loop do
           while @a < 100 do
@@ -43,7 +43,7 @@ module Ownlan
       private
 
       def source_ip_base
-        ServiceObjects::NetworkInformation.self_ip.to_s.split('.')[0..1].join('.')
+        ServiceObjects::NetworkInformation.self_ip(config.interface).to_s.split('.')[0..1].join('.')
       end
 
       def source_mac(a=nil, b=nil, c=nil)

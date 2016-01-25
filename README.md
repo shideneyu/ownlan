@@ -70,8 +70,8 @@ Please look at the [cli section](#command-line-interface) for more advanced opti
 **OwnLan** has four features:
 
 1. Disconnect one or several users off the wire
-2. Protecting users from those kind of attacks *[Not Implemented]*
-3. Sending custom ARP + DHCP packets easily *[Not Implemented]*
+2. Protecting users from those kind of attacks
+3. Sending custom ARP + DHCP packets easily
 4. Easy ARP packets capture *[Not Implemented]*
 
 ### Disconnecting users off the wire
@@ -98,10 +98,13 @@ You can also use the provided executable. Simple launch it in accordance to the 
 - Where [options] are either:
  
 
-        -a, --attack=<s>           Set an attack on a device on the network
+        -a, --attack=<s>          Set an attack on a device on the network
+                                  * Required: [sub-options]
         -p, --protect=<s>          Protect a device from lan attacks
-        -b, --broadcast=<s>        Inject ARP crafted packets in the wire
-        -c, --capture=<s>          Sniffing ARP packets on the network
+                                  * Required: [sub-options]
+        -b, --broadcast=<s>        Broadcast raw ARP packets to the wire.
+                                  * Required Options : victim_ip, victim_mac, source_ip, source_mac
+        -c, --capture=<s>          Sniffing ARP packets on the network [Not Implemented]
 
 
 -  where [sub-options] are either:
@@ -117,12 +120,15 @@ You can also use the provided executable. Simple launch it in accordance to the 
                           * Required options: victim_ip
                           * Falcultative options: random_source_mac
         fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
-                          * Required options: victim_ip
+                          * Required options: victim_ip [Not Implemented]
 
-        stealth             Becomes invisible from network scanners, preventing you from getting targeted.
-        static              Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning.
-        freeze              Reset and Freeze your ARP Cache. Good against NTOAs.
-        resynchronize       Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway
+        resynchronize       Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway. Default params are your mac and the gateway's mac. WARNING: If your gateway_mac is the attacker's, this protection won't work. In this case, input the gateway's mac manually.
+                          * Optional options: victim_mac , gateway_mac
+        stealth             Becomes invisible from network scanners, preventing you from getting targeted. [Not Implemented]
+        static              Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning. [Not Implemented]
+        freeze              Reset and Freeze your ARP Cache. Good against NTOAs. [Not Implemented]
+
+
         attack. (reveive IP or MAC argument)
 
 
@@ -132,10 +138,15 @@ You can also use the provided executable. Simple launch it in accordance to the 
         -d, --delay=<f>            Set the time lapse delay between each packet (default: 0.5)
         -i, --interface=<s>        Set the network interface which will be used (default: wlan0)
         -r, --random-source-mac    If setted, the used origin addresses will be randomly generated.
-        -t, --victim-ip=<s>        Set the ip of the victim ip address.
-        -s, --source-mac=<s>       Set the mac of the source mac address.
-        -v, --version              Print version and exit
+        -t, --victim-ip=<s>        Set the ip address of the target.
+        -v, --victim-mac=<s>       Set the mac address of the target
+        -g, --gateway-ip=<s>       Set the ip adress of the gateway
+        -e, --gateway-mac=<s>      Set the mac adress of the gateway. (for Protect only)
+        -s, --source-mac=<s>       Set the mac of the source mac address. Default: Your mac address for wlan0 (00:c0:ca:69:0f:a9)
+        -o, --source-ip=<s>        Set the ip address of the originating packet.
+        -n, --version              Print version and exit
         -h, --help                 Show this message
+
 
 
 
