@@ -129,9 +129,6 @@ You can also use the provided executable. Simple launch it in accordance to the 
         freeze              Reset and Freeze your ARP Cache. Good against NTOAs. [Not Implemented]
 
 
-        attack. (reveive IP or MAC argument)
-
-
 - Where  [Other Options] can be:
 
 
