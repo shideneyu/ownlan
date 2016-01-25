@@ -122,7 +122,8 @@ You can also use the provided executable. Simple launch it in accordance to the 
         fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
                           * Required options: victim_ip [Not Implemented]
 
-        resynchronize       Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway. Default params are your mac and the gateway's mac. WARNING: If your gateway_mac is the attacker's, this protection won't work. In this case, input the gateway's mac manually.
+        resynchronize       Operate a dual duplex attack on a victim to disconnect the attacker and heal the victim. Warning: If you are the victim, you will have to fill the optional options.
+                          * Required options: victim_ip
                           * Optional options: victim_mac , gateway_mac
         stealth             Becomes invisible from network scanners, preventing you from getting targeted. [Not Implemented]
         static              Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning. [Not Implemented]

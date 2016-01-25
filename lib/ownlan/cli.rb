@@ -50,9 +50,9 @@ Protect sub-options:
   stealth          Becomes invisible from network scanners, preventing you from getting targeted.
   static           Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning.
   freeze           Reset and Freeze your ARP Cache. Good against NTOAs.
-  resynchronize    Resynchronize the Gateway ARP Cache by sending to it continuous healthy correspondancies packets to protect someone or yourself from gateway attack. Default params are your mac and the gateway's mac. WARNING: If your gateway_mac is the attacker's, this protection won't work. In this case, input the gateway's mac manually.
-                   * Required options: target_ip
-                   * Optional options: target_mac , gateway_mac
+  resynchronize    Operate a dual duplex attack on a victim to disconnect the attacker and heal the victim. Warning: If you are the victim, you will have to fill the optional options.
+                   * Required options: victim_ip
+                   * Optional options: victim_mac , gateway_mac
 
   EOS
 
