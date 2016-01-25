@@ -39,6 +39,7 @@ module Ownlan
       @modes      = { attack: attack_sub_modes, protect: protect_sub_modes, manual: manual_sub_modes }
       @interface  = 'wlan0'
       @delay      = 0.5
+      @random_mac = false
     end
 
     def source_mac

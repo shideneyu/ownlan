@@ -112,13 +112,13 @@ You can also use the provided executable. Simple launch it in accordance to the 
 
         client              Set a First-Duplex disconnection attack (the client is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                           * Required options: victim_ip
-                          * Falcultative options: random_source_mac , source_mac
+                          * Falcultative options: random_mac , source_mac
         gateway             Set a Second-Duplex disconnection attack (the gateway is targeted). If no source mac argument, yours will be given (useful for MITM Attacks).
                           * Required options: victim_ip
-                          * Falcultative options: random_source_mac , source_mac
+                          * Falcultative options: random_mac , source_mac
         ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
                           * Required options: victim_ip
-                          * Falcultative options: random_source_mac
+                          * Falcultative options: random_mac
         fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
                           * Required options: victim_ip [Not Implemented]
 
