@@ -142,7 +142,7 @@ You can also use the provided executable. Simple launch it in accordance to the 
         -v, --victim-mac=<s>       Set the mac address of the target
         -g, --gateway-ip=<s>       Set the ip adress of the gateway
         -e, --gateway-mac=<s>      Set the mac adress of the gateway. (for Protect only)
-        -s, --source-mac=<s>       Set the mac of the source mac address. Default: Your mac address for wlan0 (00:c0:ca:69:0f:a9)
+        -s, --source-mac=<s>       Set the mac of the source mac address.
         -o, --source-ip=<s>        Set the ip address of the originating packet.
         -n, --version              Print version and exit
         -h, --help                 Show this message
