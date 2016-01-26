@@ -83,7 +83,7 @@ Other Options:
   opt :victim_mac,         "Set the mac address of the target", type: :string
   opt :gateway_ip,         "Set the ip adress of the gateway", type: :string
   opt :gateway_mac,        "Set the mac adress of the gateway. (for Protect only)", type: :string
-  opt :source_mac,         "Set the mac of the source mac address. #{mac=ServiceObjects::NetworkInformation.self_mac('wlan1') ; 'Default: Your mac address for wlan0 (' + mac + ')' if !mac.empty?}", short: 's', type: :string
+  opt :source_mac,         "Set the mac of the source mac address. Default: Your mac address for wlan0", short: 's', type: :string
   opt :source_ip,          "Set the ip address of the originating packet.", type: :string
 
       end

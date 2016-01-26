@@ -3,7 +3,7 @@ module ServiceObjects
 
     attr_reader :packet
 
-    def initialize(saddr, daddr, saddr_ip, daddr_ip)
+    def initialize(saddr, daddr, saddr_ip, daddr_ip, opcode = 2)
       arp_packet = ::PacketFu::ARPPacket.new
 
       arp_packet.eth_saddr     = saddr
@@ -12,7 +12,7 @@ module ServiceObjects
       arp_packet.arp_daddr_mac = daddr
       arp_packet.arp_saddr_ip  = saddr_ip
       arp_packet.arp_daddr_ip  = daddr_ip
-      arp_packet.arp_opcode    = 2
+      arp_packet.arp_opcode    = opcode
 
       @packet = arp_packet
     end
