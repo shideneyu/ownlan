@@ -9,7 +9,7 @@ module Ownlan
         @i = 0
 
         saddr          = "00:03:FF:#{@a}:#{@b}:#{@c}"
-        daddr          = victim_mac
+        daddr          = 'FF:FF:FF:FF:FF:FF'
         saddr_ip       = "#{source_ip_base}.#{@b}.#{@c}"
         daddr_ip       = victim_ip
         opcode         = 1
