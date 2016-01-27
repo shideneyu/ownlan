@@ -70,12 +70,11 @@ Please look at the [cli section](#command-line-interface) for more advanced opti
 
 ## Features
 
-**OwnLan** has four features:
+**OwnLan** has three features:
 
 1. Disconnect one or several users off the wire
 2. Protecting users from those kind of attacks
 3. Sending custom ARP + DHCP packets easily
-4. Easy ARP packets capture *[Not Implemented]*
 
 ### Disconnecting users off the wire
 
