@@ -21,7 +21,6 @@ EOS
   opt :attack, "Set an attack on a device on the network",  short: 'a', type: :string
   opt :protect, "Protect a device from lan attacks",        short: 'p', type: :string
   opt :broadcast, "Inject ARP crafted packets in the wire", short: 'b'
-  opt :capture, "Sniffing ARP packets on the network",      short: 'c', type: :string
 
 # Attack part
 banner <<-EOS
@@ -38,8 +37,7 @@ Attacks sub-options:
   ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
                       * Required options: victim_ip
                       * Falcultative options: random_mac
-  fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
-                      * Required options: victim_ip
+
   EOS
 
 
@@ -47,9 +45,6 @@ Attacks sub-options:
 banner <<-EOS
 
 Protect sub-options:
-  stealth          Becomes invisible from network scanners, preventing you from getting targeted.
-  static           Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning.
-  freeze           Reset and Freeze your ARP Cache. Good against NTOAs.
   resynchronize    Operate a dual duplex attack on a victim to disconnect the attacker and heal the victim. Warning: If you are the victim, you will have to fill the optional options.
                    * Required options: victim_ip
                    * Optional options: victim_mac , gateway_mac
@@ -61,12 +56,6 @@ banner <<-EOS
 
 Broadcast:        Send raw ARP packets to the wire.
                   * Required Options : victim_ip, victim_mac, source_ip, source_mac
-
-  EOS
-
-# Capture part
-banner <<-EOS
-Capture sub-options:
 
   EOS
 

@@ -85,11 +85,11 @@ The biggest part of **OwnLan**. It disconnects clients thanks to severals techni
 
 - Gateway side ARP Cache Poisoning (**second duplex**). *A less known attack and powerful one, used by ``NetCut`` , the principle is to give the gateway a fake correspondancy of the victim MAC Adress to make the later one unreachable. If no MAC Adress is given, yours will be given.*
 
-- Neighbour Table Overflow attack. *I invented this attack, not to be modest. In fact, I should say 'implemented' since, usually, it is the gateway which is attacked (even so, this one attack is very rare), here, we attack the client directly. I don't think anyone has ever thought of this... and it works! The **NTOA** will not insert random MAC adress, but following a scheme, to ensure that 2 same mac adress won't be injected. So, it makes the attack faster. One client or all clients can be specified.*
+- Neighbour Table Overflow attack. * The Neighbour Table Overflow attack will generate identifications packets to the specified target to completely isolate him from the network. The **NTOA** attack can be used to stress test client (gateway, computers) to see if they can undure heavy charges.
 
-- Gateway ARP Cache Overflow. *This attack will render the GateWay ARP Cache unusable, and will make a loss of connectivity to all the clients. Some CISCO routers are immuned to this attack though*
+### Protecting clients
 
-- DHCP Lease Spoofing [Not Implemented]. *This attack will spoof DHCP lease (udp) packet by telling the DHCP server 'Hello, I don't use this IP anymore, just disconnect me' . As of today, this attack is extremly rare, difficult to make, and used only by ``Yersinia`` . There is nothing to prevent this attack, after it has been used. Really.
+- Resynchronize . This feature will instanciate a full duplex ARP attack to resynchronize the client to the Gateway. Very useful against active attacks.
 
 
 ### Command Line Interface
@@ -107,8 +107,6 @@ You can also use the provided executable. Simple launch it in accordance to the 
                                   * Required: [sub-options]
         -b, --broadcast=<s>        Broadcast raw ARP packets to the wire.
                                   * Required Options : victim_ip, victim_mac, source_ip, source_mac
-        -c, --capture=<s>          Sniffing ARP packets on the network [Not Implemented]
-
 
 -  where [sub-options] are either:
 
@@ -122,16 +120,9 @@ You can also use the provided executable. Simple launch it in accordance to the 
         ntoa                The client is targeted to get disconnected, using a neighbour table overflow attack. Requires a victim ip.
                           * Required options: victim_ip
                           * Falcultative options: random_mac
-        fake-ip-conflict    Generate a fake ip conflict to the victim. Can be used along all the others attacks, or alone.
-                          * Required options: victim_ip [Not Implemented]
-
         resynchronize       Operate a dual duplex attack on a victim to disconnect the attacker and heal the victim. Warning: If you are the victim, you will have to fill the optional options.
                           * Required options: victim_ip
                           * Optional options: victim_mac , gateway_mac
-        stealth             Becomes invisible from network scanners, preventing you from getting targeted. [Not Implemented]
-        static              Set a static ARP Cache for the current session. Good against first-duplex ARP Cache Poisoning. [Not Implemented]
-        freeze              Reset and Freeze your ARP Cache. Good against NTOAs. [Not Implemented]
-
 
 - Where  [Other Options] can be:
 
