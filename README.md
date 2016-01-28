@@ -1,5 +1,8 @@
 # Ownlan
 
+[![Gem Version](https://badge.fury.io/rb/ownlan.svg)](http://badge.fury.io/rb/ownlan)
+[![Code Climate](https://codeclimate.com/github/shideneyu/ownlan/badges/gpa.svg)](https://codeclimate.com/github/shideneyu/ownlan)
+
 __Ownlan__ aims to be a simple, concise and useful pentesting LAN poisoning suite, Written in ``Ruby`` and using ``PacketFU`` for reading and sending the packets off the wire. I decided to make this suite of tools mainly due do to the lack of existing tools on Linux, on top of helping me understanding the whole process behind the scene. OwnLan got uniques features, with some exclusives and excitings attacks probably never ever used on a (pentesting) network.
 
 
@@ -145,6 +148,18 @@ You can also use the provided executable. Simple launch it in accordance to the 
 
 
 
+## Security
+
+As a basic form of security __Ownlan__ provides a set of SHA512 checksums for
+every Gem release.  These checksums can be found in the `checksum/` directory.
+Although these checksums do not prevent malicious users from tampering with a
+built Gem they can be used for basic integrity verification purposes.
+
+The checksum of a file can be checked using the `sha512sum` command.  For
+example:
+
+    $ sha512sum pkg/ownlan-0.4.6.gem
+    72611fba1430f40d0b61c71a746d6295defbea543609a5b00519c0a1e752228a1e330a7e7c846579cbcf464b5756e46574355eba27da86042c946920bbe26c67  pkg/ownlan-0.4.6.gem
 
 ## Versioning
 
