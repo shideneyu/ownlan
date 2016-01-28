@@ -29,6 +29,9 @@ And require it in your application:
 
 ## Usage
 
+:warning: **Important Note** :warning:: Ownlan *does* only work on Linux based computers until I find a way for the gem to parse automatically the current mac address of the given interface in a Cross-Platform way. I might write a gem for this.
+
+### Video Tutorial ###
 [![ownlan_video_preview](http://image.noelshack.com/fichiers/2016/04/1453938821-youtube-thumbail3.png)](https://www.youtube.com/watch?v=mAczNeTjMt4 "Ownlan video preview")
 
 ### Configuration ###
