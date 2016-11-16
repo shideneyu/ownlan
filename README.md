@@ -178,6 +178,11 @@ __Ownlan__ follows [Semantic Versioning 2.0](http://semver.org/).
 Any question ? Feel free to contact me at `contact(at)sidney.email` .
 Any issue ? Open a [ticket](https://github.com/shideneyu/ownlan/issues) !
 
+## Paris.rb Conference
+
+This gem was introduced during the [Paris.rb](https://www.rubyparis.org/) meetup on the 2nd of February 2016. You can find its [presentation slide here](https://docs.google.com/presentation/d/1H4CmYzxtmdn6cV-PDohPyU7Iki-97TZ3hEe8quUSem8/edit#slide=id.p).
+![ownlan_img1](http://image.noelshack.com/fichiers/2016/46/1479330164-parisrb1.png)
+
 ## License
 
 Copyright (c) 2016 Sidney Sissaoui
