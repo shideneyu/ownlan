@@ -92,7 +92,7 @@ The biggest part of **OwnLan**. It disconnects clients thanks to severals techni
 
 - Gateway side ARP Cache Poisoning (**second duplex**). *A less known attack and powerful one, used by ``NetCut`` , the principle is to give the gateway a fake correspondancy of the victim MAC Adress to make the later one unreachable. If no MAC Adress is given, yours will be given.*
 
-- Neighbour Table Overflow attack. * The Neighbour Table Overflow attack will generate identifications packets to the specified target to completely isolate him from the network. The **NTOA** attack can be used to stress test client (gateway, computers) to see if they can undure heavy charges.
+- Neighbour Table Overflow attack. * The Neighbour Table Overflow attack will generate identifications packets to the specified target to completely isolate him from the network. The **NTOA** attack can be used to stress test client (gateway, computers) to see if they can endure heavy charges.
 
 ### Protecting clients
 
